@@ -75,7 +75,7 @@ class X
 
   public function mode( $mode )
   {
-    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to change moge with wrong value" );
+    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to change mode with wrong value" );
 
     $this->_MODE = $mode;
 
