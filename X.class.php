@@ -1,7 +1,4 @@
 <?php
-/**
- * Changes all types into js-like ones
- */
 class X
 {
   protected $value;
