@@ -66,14 +66,14 @@ class X
     return $this->value;
   }
 
-  public function set( $value ) : AType
+  public function set( $value )
   {
     $this->value = $value;
     if ( $this->_MODE == self::CHAIN ) return $this       ;
     else                               return $this->value;
   }
 
-  public function mode( $mode ) : AType
+  public function mode( $mode )
   {
     if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to change moge with wrong value" );
 
