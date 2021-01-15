@@ -1,5 +1,5 @@
 # Xeno
-Makes native PHP functions more bearable and more.
+Makes native PHP functions more bearable and useable.
 
 ```php
 
