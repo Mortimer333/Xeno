@@ -1,4 +1,7 @@
-<html  dir="ltr">
+<?php
+  require_once '../Type.class.php';
+?>
+<html dir="ltr">
   <head>
     <style media="screen">
       * {
@@ -35,7 +38,7 @@
   <body>
     <?php
 
-      $file = "str_testcase.json");
+      $file = file_get_contents("./str_testcase.json");
       $str_testcase = new Type( $file );
       $str_testcase->json_decode();
 
