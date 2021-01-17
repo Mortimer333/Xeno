@@ -92,3 +92,11 @@ When you want to create method named the same for all types (ex. cut) then add p
 ```
 
 Here I have added two methods `str_cut` and `array_cut`. Both of them you can call by `cut` and script will choose right one by its prefix and current value (or none if you call it on non supported type, in this example it would be numeric). Of course you can still call them by their full name but you need to be sure that you are using right values.
+
+```php
+  $str = new X('Hello world');
+  echo $str->cut( 1, 2 )->get();       // output "el"
+
+  $ary = new X([' Hello', 'world ']);
+  print_r( $ary->cut( 1, 2 )->get() ); // output Array ( [0] => world ) 
+```
