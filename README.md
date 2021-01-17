@@ -40,3 +40,59 @@ To get variable you can use `get` method, to set it use `set`.
   print_r($array->get())  // output Array ( [0] => b ) 
 ```
 Any other methods are defined by you or are native PHP functions.
+
+# Methods
+
+## Replacing native functions
+
+Xeno methods are placed higher then functions in call tree. If you want to replace native php function with your own you just add method with the same name. 
+
+### Example
+```php 
+[...] // previous elements in class
+  // here we add method which is replacing substr
+  public substr ( string $value )
+  {
+    return "sub";
+  }
+[...] // the rest of class
+ 
+$str = new X('a');
+// now this methods changes our value to "sub" every time we use it
+echo $str->substr()->get(); // output "sub"
+
+```
+
+## Multi assigning
+
+When you want to create method named the same for all types (ex. cut) then add prefix to its name which will define the type it will be operating on:
+ - `str_` - string
+ - `ary_` - array
+ - `obj_` - object
+ - `num_` - numeric (int or float)
+ - `int_` - only integer
+ - `dec_` - only float
+
+### Example
+
+```php
+[...] // previous elements in class
+  /**
+    *  Allows to cut strings by indexes or length (substr but with indexes option)
+    */
+  public function str_cut (string $value)
+  {
+    // code
+  }
+
+  /**
+    *  Allows to cut arrays by indexes or length (array_slice but with indexes option)
+    */
+  public function ary_cut (array $value)
+  {
+    // code
+  }
+[...] // the rest of class
+```
+
+Here I have added two methods `str_cut` and `array_cut`. Both of them you can call by `cut` and script will choose right one by its prefix and current value (or none if you call it on non supported type, in this example it would be numeric). Of course you can still call them by their full name but you need to be sure that you are using right values.
