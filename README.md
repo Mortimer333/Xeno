@@ -77,21 +77,17 @@ When you want to create method named the same for all types (ex. cut) then add p
 
 ```php
 [...] // previous elements in class
-  /**
-    *  Allows to cut strings by indexes or length (substr but with indexes option)
-    */
+
   public function str_cut (string $value)
   {
     // code
   }
 
-  /**
-    *  Allows to cut arrays by indexes or length (array_slice but with indexes option)
-    */
   public function ary_cut (array $value)
   {
     // code
   }
+  
 [...] // the rest of class
 ```
 
