@@ -45,7 +45,7 @@ Any other methods are defined by you or are native PHP functions.
 
 ## Replacing native functions
 
-Xeno methods are placed higher then functions in call tree. If you want to replace native php function with your own you just add method with the same name. 
+Xeno methods are placed higher then functions in call tree. If you want to replace native php function with your own just add method with the same name. 
 
 ### Example
 ```php 
