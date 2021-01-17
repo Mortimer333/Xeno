@@ -16,15 +16,39 @@ class X
 
   public function __call( $func, $args )
   {
+    !method_exists( $this, $func ) or $method = true;
 
     if ( !is_callable($func) ) {
 
-          if ( is_array( $this->value  ) && is_callable("array_"  . $func) ) $func = "array_"  . $func;
+      /**
+        * CALL TREE
+        */
+
+      // Check methods first
+      if ( is_string( $this->value ) && method_exists($this,"str_" . $func) ) {
+        $method = true;
+        $func = "str_" . $func;
+      } elseif ( is_array ( $this->value ) && method_exists($this,"ary_" . $func) ) {
+        $method = true;
+        $func = "ary_" . $func;
+      } elseif ( is_numeric( $this->value ) && filter_var( $this->value, FILTER_VALIDATE_INT  ) !== false && method_exists($this, "int_" . $func) ) {
+        $method = true;
+        $func = "int_" . $func;
+      } elseif ( is_numeric( $this->value ) && filter_var( $this->value, FILTER_VALIDATE_FLOAT) !== false && method_exists($this, "dec_" . $func) ) {
+        $method = true;
+        $func = "dec_" . $func;
+      } elseif ( is_numeric( $this->value ) && method_exists($this, "num_" . $func) ) {
+        $method = true;
+        $func = "num_" . $func;
+      } elseif ( is_object( $this->value ) && method_exists($this, "obj_" . $func) ) {
+        $method = true;
+        $func = "obj_" . $func;
+      } // Then callable functions
+      elseif ( is_array ( $this->value ) && is_callable("array_"  . $func) ) $func = "array_"  . $func;
       elseif ( is_string( $this->value ) && is_callable("str_"    . $func) ) $func = "str_"    . $func;
       elseif ( is_string( $this->value ) && is_callable("str"     . $func) ) $func = "str"     . $func;
       elseif ( is_string( $this->value ) && is_callable("string_" . $func) ) $func = "string_" . $func;
       else throw new \BadMethodCallException( $func );
-
     }
 
     switch ( $func ) {
@@ -55,7 +79,8 @@ class X
         break;
     }
 
-    $this->value = call_user_func_array( $func, $args );
+    if ( isset($method) ) $this->value = call_user_func_array( [ $this, $func ], $args );
+    else                  $this->value = call_user_func_array( $func           , $args );
 
         if ( $this->_MODE == self::RETURN ) return $this->value;
     elseif ( $this->_MODE == self::CHAIN  ) return $this       ;
