@@ -99,4 +99,7 @@ Here I have added two methods `str_cut` and `array_cut`. Both of them you can ca
 
   $ary = new X([' Hello', 'world ']);
   print_r( $ary->cut( 1, 2 )->get() ); // output Array ( [0] => world ) 
+  
+  $int = new X(1);
+  echo $int->cut( 1, 2 )->get();       // Fatal error: Uncaught BadMethodCallException: cut
 ```
