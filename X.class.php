@@ -8,7 +8,7 @@ class X
 
   function __construct( $value, $mode = self::CHAIN )
   {
-    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to create new X class with wrong mode" );
+    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to create new X class with a wrong mode" );
 
     $this->value = $value;
     $this->_MODE = $mode;
@@ -16,80 +16,74 @@ class X
 
   public function __call( $func, $args )
   {
-    !method_exists( $this, $func ) or $method = true;
+    $method = false;
 
-    if ( !is_callable($func) ) {
+    if ( method_exists( $this, $func ) ) $method = true;
+    elseif ( !is_callable($func) ) {
 
-      /**
-        * CALL TREE
-        */
+      // CALL TREE
+      $type = gettype($this->value); // get type of current value so we can quickly get method prefix
 
-      // Check methods first
-      if ( is_string( $this->value ) && method_exists($this,"str_" . $func) ) {
+      $method_tree = [
+        'string'  => 'str_',
+        'array'   => 'ary_',
+        'integer' => 'int_',
+        'double'  => 'dec_',
+        'object'  => 'obj_',
+        'boolean'      => '',
+        'resource'     => '',
+        'unknown type' => '',
+      ];
+
+      $new_fn = $method_tree[ $type ] . $func;
+
+      if ( method_exists( $this, $new_fn ) )  {
+
         $method = true;
-        $func = "str_" . $func;
-      } elseif ( is_array ( $this->value ) && method_exists($this,"ary_" . $func) ) {
-        $method = true;
-        $func = "ary_" . $func;
-      } elseif ( is_numeric( $this->value ) && filter_var( $this->value, FILTER_VALIDATE_INT  ) !== false && method_exists($this, "int_" . $func) ) {
-        $method = true;
-        $func = "int_" . $func;
-      } elseif ( is_numeric( $this->value ) && filter_var( $this->value, FILTER_VALIDATE_FLOAT) !== false && method_exists($this, "dec_" . $func) ) {
-        $method = true;
-        $func = "dec_" . $func;
-      } elseif ( is_numeric( $this->value ) && method_exists($this, "num_" . $func) ) {
-        $method = true;
-        $func = "num_" . $func;
-      } elseif ( is_object( $this->value ) && method_exists($this, "obj_" . $func) ) {
-        $method = true;
-        $func = "obj_" . $func;
-      } // Then callable functions
-      elseif ( is_array ( $this->value ) && is_callable("array_"  . $func) ) $func = "array_"  . $func;
-      elseif ( is_string( $this->value ) && is_callable("str_"    . $func) ) $func = "str_"    . $func;
-      elseif ( is_string( $this->value ) && is_callable("str"     . $func) ) $func = "str"     . $func;
-      elseif ( is_string( $this->value ) && is_callable("string_" . $func) ) $func = "string_" . $func;
-      else throw new \BadMethodCallException( $func );
+        $func = $new_fn;
+
+      } else {
+
+        // Can't think of a way to make this quicker
+        if     ( $type == 'array'  && is_callable('array_'  . $func) ) $func = 'array_'  . $func;
+        elseif ( $type == 'string' ) {
+
+          if     ( is_callable('str_'    . $func) ) $func = 'str_'    . $func;
+          elseif ( is_callable('str'     . $func) ) $func = 'str'     . $func;
+          elseif ( is_callable('string_' . $func) ) $func = 'string_' . $func;
+          else throw new \BadMethodCallException( $func );
+
+        } else throw new \BadMethodCallException( $func );
+
+      }
+
     }
 
-    switch ( $func ) {
-      case 'explode' :
-        if ( sizeof($args) < 1 ) throw new \BadMethodCallException( "{$func} too few arguments" );
-        $args = array_merge( array_merge( [ $args[0] ], [ $this->value ] ), array_slice($args, 1) );
-        break;
-
-      case 'implode' :
-      case 'join'    :
-        $args = array_merge( $args, [ $this->value ] );
-        break;
-
-      case 'str_replace' :
-        if (sizeof($args) < 2) throw new \BadMethodCallException( "{$func} too few arguments" );
-        $args = array_merge( array_merge( array_slice($args,0,2), [ $this->value ] ), array_slice($args,2) );
-        break;
-
-      // all cases when we are not using value
-      case 'get_html_translation_table' :
-      case 'localeconv' :
-      case 'nl_langinfo' :
-      case 'setlocale' :
-        break;
-
-      default :
-        $args = array_merge( [ $this->value ], $args );
-        break;
-    }
-
-    if ( isset($method) ) $this->value = call_user_func_array( [ $this, $func ], $args );
-    else                  $this->value = call_user_func_array( $func           , $args );
+    if ( $method == true ) $this->value = [$this, $func]( ...$args );               // is it's method we don't pass value
+    else                   $this->value = $func         ( $this->value, ...$args );
 
         if ( $this->_MODE == self::RETURN ) return $this->value;
     elseif ( $this->_MODE == self::CHAIN  ) return $this       ;
   }
 
+  /**
+    * Gets curent value
+    *
+    * @return mixin depends on previously used functions
+    */
+
   public function get ()
   {
     return $this->value;
   }
+
+  /**
+    *   Sets curent value
+    *
+    *   @param mixin depened to which value you want to switch
+    *
+    *   @return Type | mixin
+    */
 
   public function set( $value )
   {
@@ -98,7 +92,15 @@ class X
     else                               return $this->value;
   }
 
-  public function mode( $mode )
+  /**
+    *   Gets curent value
+    *
+    *   @param int to which mode switch
+    *
+    *   @return Type|void depends on which mode is enabled
+    */
+
+  public function mode( int $mode )
   {
     if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to change mode with wrong value" );
 
@@ -106,4 +108,39 @@ class X
 
     if ($this->_MODE == self::CHAIN) return $this;
   }
+
+  // all exception for native function which don't take value as first parameter
+  // making them into methods is quicker than preparing arguments in switch
+
+  public function explode( string $sep, int $limit = PHP_INT_MAX ) : array
+  {
+    return explode( $sep, $this->value, $limit );
+  }
+
+  public function str_replace( $search, $replace, int $count = null ) : string
+  {
+    return str_replace( $search, $replace, $this->value, $count );
+  }
+
+  public function get_html_translation_table( int $table = HTML_SPECIALCHARS , int $flags = ENT_COMPAT , string $encoding = "UTF-8" ) : array
+  {
+    return get_html_translation_table( $table, $flags, $encoding );
+  }
+
+  public function localeconv()
+  {
+    return localeconv();
+  }
+
+  public function nl_langinfo( int $item )
+  {
+    return nl_langinfo( $item );
+  }
+
+  public function setlocale()
+  {
+    $args = func_get_args();
+    return nl_langinfo( ...$args );
+  }
+
 }
