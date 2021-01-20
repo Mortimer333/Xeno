@@ -9,5 +9,6 @@
     "license": "GPL-2.0-only",
     "autoload": {
         "psr-4": { "Xeno\\": "src/" }
-    }
+    },
+    "minimum-stability": "dev"
 }
