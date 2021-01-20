@@ -4,5 +4,10 @@
     "dist": {
         "url": "https://github.com/Mortimer333/Xeno/archive/0.3.0.zip",
         "type": "zip"
+    },
+    "keywords": ["chain","syntax"],
+    "license": "GPL-2.0-only",
+    "autoload": {
+        "psr-4": { "Xeno\\": "src/" }
     }
 }
