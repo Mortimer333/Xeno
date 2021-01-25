@@ -125,4 +125,12 @@ Short names and methods :
 
 # Disclaimer
 
+## Performance
+
 For some comparison a milion iterations of str_replace on my computer was 0.05 s. That means you shouldn't use this library for any big operations. It's purpose is to enable chain syntax on primitives without installing new packages and having library which will be always updated. If you can install additional stuff on your serwer I recommend https://github.com/nikic/scalar_objects for better syntax on primitives.
+
+## Dynamic functions
+
+You cannot use few native function with this library because of `Cannot call dynamically` warning. Functions :
+ - compact
+ - extract
