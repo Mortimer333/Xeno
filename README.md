@@ -15,6 +15,14 @@
 
 This library allows user to use native PHP functions (and all functions defined globally) with chain syntax making them a lot more readable and easier to use.
 
+# Installation
+
+Installation method is via composer and its packagist package [xeno/xeno](https://packagist.org/packages/xeno/xeno).
+```
+$ composer require xeno/xeno
+```
+The current version is `dev` so you will have to set composers `minimum-stability`.
+
 # How to use
 
 Class is named `Xeno\X` and has two arguments: 
