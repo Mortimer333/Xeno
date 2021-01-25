@@ -1,0 +1,160 @@
+[{
+	"function": "array_change_key_case",
+	"values": []
+}, {
+	"function": "array_chunk",
+	"values": [2]
+}, {
+	"function": "array_column",
+	"values": ["a"]
+}, {
+	"function": "array_combine",
+	"values": [{"a" : "c", "b" : "d"}]
+}, {
+	"function": "array_count_values",
+	"values": []
+}, {
+	"function": "array_diff_assoc",
+	"values": [["a","b","c"]]
+}, {
+	"function": "array_diff_key",
+	"values": [{"a" :"A","b" : "B","c" : "c"}]
+}, {
+	"function": "array_diff",
+	"values": [["a","b"]]
+}, {
+	"function": "array_fill_keys",
+	"values": ["banana"]
+}, {
+	"function": "array_flip",
+	"values": []
+}, {
+	"function": "array_intersect_assoc",
+	"values": [{"a" : "b"}]
+}, {
+	"function": "array_intersect_key",
+	"values": [{"c" : "d"}]
+}, {
+	"function": "array_intersect",
+	"values": [["a"]]
+}, {
+	"function": "array_key_exists",
+	"values": ["a"]
+}, {
+	"function": "array_key_first",
+	"values": []
+}, {
+	"function": "array_key_last",
+	"values": []
+}, {
+	"function": "array_keys",
+	"values": []
+}, {
+	"function": "array_merge_recursive",
+	"values": [["a","b"]]
+}, {
+	"function": "array_merge",
+	"values": [["a","b"]]
+}, {
+	"function": "array_multisort",
+	"values": [[1, 3]]
+}, {
+	"function": "array_pad",
+	"values": [5,0]
+}, {
+	"function": "array_pop",
+	"values": []
+}, {
+	"function": "array_product",
+	"values": []
+}, {
+	"function": "array_push",
+	"values": ["b","c"]
+}, {
+	"function": "array_rand",
+	"values": [2]
+}, {
+	"function": "array_replace_recursive",
+	"values": [{"a" : "b"}]
+}, {
+	"function": "array_replace",
+	"values": [{"a":"b"}]
+}, {
+	"function": "array_reverse",
+	"values": []
+}, {
+	"function": "array_shift",
+	"values": []
+}, {
+	"function": "array_slice",
+	"values": [0,1]
+}, {
+	"function": "array_splice",
+	"values": [0,1]
+}, {
+	"function": "array_sum",
+	"values": []
+}, {
+	"function": "array_unique",
+	"values": []
+}, {
+	"function": "array_unshift",
+	"values": ["b"]
+}, {
+	"function": "array_values",
+	"values": []
+}, {
+	"function": "arsort",
+	"values": []
+}, {
+	"function": "asort",
+	"values": []
+}, {
+	"function": "count",
+	"values": []
+}, {
+	"function": "current",
+	"values": []
+}, {
+	"function": "end",
+	"values": []
+}, {
+	"function": "key",
+	"values": []
+}, {
+	"function": "krsort",
+	"values": []
+}, {
+	"function": "ksort",
+	"values": []
+}, {
+	"function": "natcasesort",
+	"values": []
+}, {
+	"function": "natsort",
+	"values": []
+}, {
+	"function": "next",
+	"values": []
+}, {
+	"function": "pos",
+	"values": []
+}, {
+	"function": "prev",
+	"values": []
+}, {
+	"function": "reset",
+	"values": []
+}, {
+	"function": "rsort",
+	"values": []
+}, {
+	"function": "shuffle",
+	"values": []
+}, {
+	"function": "sizeof",
+	"values": []
+}, {
+	"function": "sort",
+	"values": []
+}]
