@@ -1,4 +1,6 @@
 <?php
+namespace Xeno;
+
 class X
 {
   protected $value;
@@ -59,11 +61,14 @@ class X
 
     }
 
-    if ( $method == true ) $this->value = [$this, $func]( ...$args );               // is it's method we don't pass value
-    else                   $this->value = $func         ( $this->value, ...$args );
+    if ( $method == true ) $value = [$this, $func]( ...$args );               // is it's method we don't pass value
+    else                   $value = $func         ( $this->value, ...$args );
 
-        if ( $this->_MODE == self::RETURN ) return $this->value;
-    elseif ( $this->_MODE == self::CHAIN  ) return $this       ;
+        if ( $this->_MODE == self::RETURN ) return $value;
+    elseif ( $this->_MODE == self::CHAIN  ) {
+      $this->value = $value;
+      return $this;
+    }
   }
 
   /**
@@ -141,6 +146,110 @@ class X
   {
     $args = func_get_args();
     return nl_langinfo( ...$args );
+  }
+
+  // Array exceptions
+
+  public function array_combine( array $keys ) : array
+  {
+    return array_combine( $keys, $this->value );
+  }
+
+  public function ary_combine( array $keys ) : array
+  {
+    return array_combine( $keys, $this->value );
+  }
+
+  public function array_fill( int $start_index , int $count , mixed $value ) : array
+  {
+    return array_fill( $start_index, $count, $value );
+  }
+
+  public function array_key_exists( $key ) : int
+  {
+    return array_key_exists( $key, $this->value );
+  }
+
+  public function ary_key_exists( $key ) : int
+  {
+    return array_key_exists( $key, $this->value );
+  }
+
+  public function key_exists( $key ) : int
+  {
+    return array_key_exists( $key, $this->value );
+  }
+
+  public function array_search( $needle , bool $strict = false )
+  {
+    return array_search( $needle , $this->value, $strict );
+  }
+
+  public function ary_search( $needle , bool $strict = false )
+  {
+    return array_search( $needle , $this->value, $strict );
+  }
+
+  public function in_array( $needle, bool $strict = false ) : bool
+  {
+    return in_array( $needle, $this->value, $strict );
+  }
+
+  public function range( $start, $end, $step = 1 ) : array
+  {
+    return range( $start, $end, $step = 1 );
+  }
+
+  public function uasort( $callback ) : array
+  {
+    uasort( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function array_walk_recursive( $callback ) : array
+  {
+    array_walk_recursive( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function ary_walk_recursive( $callback ) : array
+  {
+    array_walk_recursive( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function array_walk( $callback ) : array
+  {
+    array_walk( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function ary_walk( $callback ) : array
+  {
+    array_walk( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function array_map( $callback ) : array
+  {
+    return array_map( $callback, $this->value );
+  }
+
+  public function ary_map( $callback ) : array
+  {
+    return array_map( $callback, $this->value );
+  }
+
+  public function uksort( $callback ) : array
+  {
+    uksort( $this->value, $callback );
+    return $this->value;
+  }
+
+  public function usort( $callback ) : array
+  {
+    usort( $this->value, $callback );
+    return $this->value;
   }
 
 }
