@@ -101,6 +101,12 @@ Here I have added two methods `str_cut` and `array_cut`. Both of them you can ca
   $int = new X(1);
   echo $int->cut( 1, 2 )->get();       // Fatal error: Uncaught BadMethodCallException: cut
 ```
+# Different behaviour
+
+Few functions (for purpose of continuity of chain) have different return values :
+ - `uasort` - returns sorted array not bool
+ - `array_walk_recursive` and `array_walk` - returns sorted array not bool
+
 # Performance
 
 The performance depends on how you call methods. Using full names of functions is much faster (3~4x) so in a case when you have thousands of operations it's better to call by using functions full names.
