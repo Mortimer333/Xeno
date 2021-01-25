@@ -2,10 +2,10 @@
 
 ```php
 
-  $str = new X(' Hello world ');
+  $str = new Xeno\X(' Hello world ');
   $str->trim()->substr(0,6)->tolower()->replace('ello','ow');
   
-  $array = new X(['s','i']);
+  $array = new Xeno\X(['s','i']);
   $array->merge(['c','k'])->implode(' ');
   
   echo $str->get() . ' ' . $array->get();
@@ -17,11 +17,11 @@ This library allows user to use native PHP functions (and all functions defined 
 
 # How to use
 
-Class is named `X` and has two arguments: 
+Class is named `Xeno\X` and has two arguments: 
  - the value you operate on
  - mode defining class behaviour [OPTIONAL]
 ```php
- $int = new X(1);
+ $int = new Xeno\X(1);
 ```
 Modes :
  - CHAIN - default, allows you to make one operation after another without returning the result and saving it into `value`
@@ -29,12 +29,12 @@ Modes :
  
 To specify using different modes you can, while defining the variable, pass as second argument one of the constants `CHAIN` or `RETURN` or use method `mode` (with passed mode to it) to change it . It will set the mode accordingly.
 ```php
- $str = new X(1, X::RETURN);  // defining new instance with return mode 
- $str->mode(X::CHAIN)         // changing mode to chain
+ $str = new Xeno\X(1, Xeno\X::RETURN);  // defining new instance with return mode 
+ $str->mode(Xeno\X::CHAIN)         // changing mode to chain
 ```
 To get a variable - use `get` method and to set it to new value - use `set`. 
 ```php
-  $array = new X(['a']);
+  $array = new Xeno\X(['a']);
   $array->set(['b']);     // changing content
   print_r($array->get())  // output Array ( [0] => b ) 
 ```
@@ -56,7 +56,7 @@ Xeno methods are placed higher then functions in call tree. If you want to repla
   }
 [...] // the rest of class
  
-$str = new X('a');
+$str = new Xeno\X('a');
 // now this methods changes our value to "sub" every time we use it
 echo $str->substr()->get(); // output "sub"
 
@@ -92,13 +92,13 @@ When you want to create method named the same for all types (ex. cut) then add p
 Here I have added two methods `str_cut` and `array_cut`. Both of them you can call by `cut` and script will choose right one by its prefix and current value (or none if you call it on non supported type, in this example it would be intiger). Of course you can still call them by their full name but you need to be sure that you are using right values.
 
 ```php
-  $str = new X('Hello world');
+  $str = new Xeno\X('Hello world');
   echo $str->cut( 1, 2 )->get();       // output "el"
 
-  $ary = new X([' Hello', 'world ']);
+  $ary = new Xeno\X([' Hello', 'world ']);
   print_r( $ary->cut( 1, 2 )->get() ); // output Array ( [0] => world ) 
   
-  $int = new X(1);
+  $int = new Xeno\X(1);
   echo $int->cut( 1, 2 )->get();       // Fatal error: Uncaught BadMethodCallException: cut
 ```
 # Different behaviour
