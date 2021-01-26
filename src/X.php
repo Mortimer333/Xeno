@@ -10,6 +10,11 @@ class X
     $this->value = $value;
   }
 
+  function __toString()
+  {
+    return $this->get();
+  }
+
   public function __call( $func, $args )
   {
     $method = false;
