@@ -21,7 +21,6 @@ Installation method is via composer and its packagist package [xeno/xeno](https:
 ```
 $ composer require xeno/xeno
 ```
-The current version is `dev` so you will have to set composers `minimum-stability`.
 
 # How to use
 
