@@ -68,9 +68,9 @@
         ?>
         <div class="result">
           <?php
-            $type = new Xeno\X(["a"=>"a","b"=>"b"], Xeno\X::RETURN);
+            $type = new Xeno\X(["a"=>"a","b"=>"b"]);
             $var = call_user_func_array( array($type, $fun['function']), $fun['values'] );
-            var_dump($var);
+            var_dump($var->get();
           ?>
         </div>
         <?php
