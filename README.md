@@ -25,20 +25,20 @@ The current version is `dev` so you will have to set composers `minimum-stabilit
 
 # How to use
 
-Class is named `Xeno\X` and has two arguments: 
- - the value you operate on
+Class is named `Xeno\X` and has one argument - the value you want to operate on.
+
 ```php
  $int = new Xeno\X(1);
 ```
 ## Get, Set
 
-To get a variable - use `get` method and to set it to new value - use `set`. 
+To get a variable - use `get` method and to set it to a new value - use `set`. 
 ```php
   $array = new Xeno\X(['a']);
   $array->set(['b']);     // changing content
   print_r($array->get())  // output Array ( [0] => b ) 
 ```
-Any other methods are defined by you or are native PHP functions.
+Any other methods are defined by you, are `exceptions` (are native functions redefined as methods because they don't pass `value` as first argument) or are native PHP functions.
 
 # Methods
 
@@ -52,7 +52,8 @@ Xeno methods are placed higher then functions in call tree. If you want to repla
   // here we add method which is replacing substr
   public substr ( string $value )
   {
-    return "sub";
+    $this->value = "sub";
+    return $this;
   }
 [...] // the rest of class
  
