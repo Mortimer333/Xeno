@@ -4,10 +4,10 @@
 
   $str = new Xeno\X(' Hello world ');
   $str->trim()->substr(0,6)->tolower()->replace('ello','ow');
-  
+
   $array = new Xeno\X(['s','i']);
   $array->merge(['c','k'])->implode(' ');
-  
+
   echo $str->get() . ' ' . $array->get();
 
 ```
@@ -31,11 +31,11 @@ Class is named `Xeno\X` and has one argument - the value you want to operate on.
 ```
 ## Get, Set
 
-To get a variable - use `get` method and to set it to a new value - use `set`. 
+To get a variable - use `get` method and to set it to a new value - use `set`.
 ```php
   $array = new Xeno\X(['a']);
   $array->set(['b']);     // changing content
-  print_r($array->get())  // output Array ( [0] => b ) 
+  print_r($array->get())  // output Array ( [0] => b )
 ```
 Any other methods are defined by you, are `exceptions` (are native functions redefined as methods because they don't pass `value` as first argument) or are native PHP functions.
 
@@ -43,10 +43,10 @@ Any other methods are defined by you, are `exceptions` (are native functions red
 
 ## Replacing native functions
 
-Xeno methods are placed higher then functions in call tree. If you want to replace native php function with your own just add method with the same name. 
+Xeno methods are placed higher then functions in call tree. If you want to replace native php function with your own just add method with the same name.
 
 ### Example
-```php 
+```php
 [...] // previous elements in class
   // here we add method which is replacing substr
   public substr ( string $value )
@@ -55,7 +55,7 @@ Xeno methods are placed higher then functions in call tree. If you want to repla
     return $this;
   }
 [...] // the rest of class
- 
+
 $str = new Xeno\X('a');
 // now this methods changes our value to "sub" every time we use it
 echo $str->substr()->get(); // output "sub"
@@ -85,27 +85,35 @@ When you want to create method named the same for all types (ex. cut) then add p
   {
     // code
   }
-  
+
 [...] // the rest of class
 ```
 
-Here I have added two methods `str_cut` and `array_cut`. Both of them you can call by `cut` and script will choose right one by its prefix and current value (or none if you call it on non supported type, in this example it would be intiger). Of course you can still call them by their full name but you need to be sure that you are using right values.
+Here I have added two methods `str_cut` and `array_cut`. Both of them you can call by `cut` and script will choose right one by its prefix and current value (or none if you call it on non supported type, in this example it would be integer). Of course you can still call them by their full name but you need to be sure that you are using right values.
 
 ```php
   $str = new Xeno\X('Hello world');
   echo $str->cut( 1, 2 )->get();       // output "el"
 
   $ary = new Xeno\X([' Hello', 'world ']);
-  print_r( $ary->cut( 1, 2 )->get() ); // output Array ( [0] => world ) 
-  
+  print_r( $ary->cut( 1, 2 )->get() ); // output Array ( [0] => world )
+
   $int = new Xeno\X(1);
   echo $int->cut( 1, 2 )->get();       // Fatal error: Uncaught BadMethodCallException: cut
 ```
-# Different behaviour
+# Different behavior
 
 Few functions (for purpose of continuity of chain) have different return values :
  - `uasort` - returns sorted array not bool
  - `array_walk_recursive` and `array_walk` - returns sorted array not bool
+ - `get_called_class` - will always return `"Xeno\X`;
+
+When threating class as string it will return current value:
+
+```php
+  $str = new Xeno\X('x');
+  echo $str; // output 'x'
+```
 
 # Performance
 
@@ -133,7 +141,7 @@ Short names and methods :
 
 ## Performance
 
-For some comparison a milion iterations of str_replace on my computer was 0.05 s. That means you shouldn't use this library for any big operations. It's purpose is to enable chain syntax on primitives without installing new packages and having library which will be always updated. If you can install additional stuff on your serwer I recommend https://github.com/nikic/scalar_objects for better syntax on primitives.
+For some comparison a million iterations of str_replace on my computer was 0.05 s. That means you shouldn't use this library for any big operations. It's purpose is to enable chain syntax on primitives without installing new packages and having library which will be always updated. If you can install additional stuff on your server I recommend https://github.com/nikic/scalar_objects for better syntax on primitives.
 
 ## Dynamic functions
 
