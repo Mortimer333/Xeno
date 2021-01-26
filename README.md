@@ -108,7 +108,7 @@ Few functions (for purpose of continuity of chain) have different return values 
  - `array_walk_recursive` and `array_walk` - returns sorted array not bool
  - `get_called_class` - will always return `"Xeno\X`;
 
-When threating class as string it will return current value:
+When class is treated as string it will return current value:
 
 ```php
   $str = new Xeno\X('x');
