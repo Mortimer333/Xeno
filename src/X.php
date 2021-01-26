@@ -242,4 +242,30 @@ class X
     return $this;
   }
 
+  // object exceptions
+
+  public function get_called_class()
+  {
+    $this->value = get_called_class(); // it will always return Xeno
+    return $this;
+  }
+
+  public function get_declared_classes()
+  {
+    $this->value = get_declared_classes();
+    return $this;
+  }
+
+  public function get_declared_interfaces()
+  {
+    $this->value = get_declared_interfaces();
+    return $this;
+  }
+
+  public function get_declared_traits()
+  {
+    $this->value = get_declared_traits();
+    return $this;
+  }
+
 }
