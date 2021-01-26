@@ -27,19 +27,11 @@ The current version is `dev` so you will have to set composers `minimum-stabilit
 
 Class is named `Xeno\X` and has two arguments: 
  - the value you operate on
- - mode defining class behaviour [OPTIONAL]
 ```php
  $int = new Xeno\X(1);
 ```
-Modes :
- - CHAIN - default, allows you to make one operation after another without returning the result and saving it into `value`
- - RETURN - after each method returns the result
- 
-To specify using different modes you can, while defining the variable, pass as second argument one of the constants `CHAIN` or `RETURN` or use method `mode` (with passed mode to it) to change it . It will set the mode accordingly.
-```php
- $str = new Xeno\X(1, Xeno\X::RETURN);  // defining new instance with return mode 
- $str->mode(Xeno\X::CHAIN)         // changing mode to chain
-```
+## Get, Set
+
 To get a variable - use `get` method and to set it to new value - use `set`. 
 ```php
   $array = new Xeno\X(['a']);
