@@ -123,19 +123,19 @@ The performance depends on how you call methods. Using full names of functions i
 
 Full names and native functions :
  - ~0.26 s - without new instance of Xeno each iteration
- - ~0.35 s - with new instance of Xeno each iteration
+ - ~0.32 s - with new instance of Xeno each iteration
 
 Full names and methods :
-  - ~0.18 s - without new instance of Xeno each iteration
-  - ~0.21 s - with new instance of Xeno each iteration
+  - ~0.11 s - without new instance of Xeno each iteration
+  - ~0.18 s - with new instance of Xeno each iteration
 
 Short names and native function :
  - ~0.67 s - without new instance of Xeno each iteration
- - ~0.83 s - with new instance of Xeno each iteration
+ - ~0.79 s - with new instance of Xeno each iteration
 
 Short names and methods :
- - ~0.71 s - without new instance of Xeno each iteration
- - ~0.81 s - with new instance of Xeno each iteration
+ - ~0.68 s - without new instance of Xeno each iteration
+ - ~0.84 s - with new instance of Xeno each iteration
 
 # Disclaimer
 
