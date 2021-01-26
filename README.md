@@ -119,7 +119,7 @@ When class is treated as string it will return current value:
 
 The performance depends on how you call methods. Using full names of functions is much faster (3~4x) so in a case when you have thousands of operations it's better to call by using functions full names.
 
-### Some numbers (milion iterations):
+### Some numbers (million iterations):
 
 Full names and native functions :
  - ~0.26 s - without new instance of Xeno each iteration
