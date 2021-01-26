@@ -4,16 +4,10 @@ namespace Xeno;
 class X
 {
   protected $value;
-  protected $_MODE;
-  public const CHAIN  = 1;
-  public const RETURN = 0;
 
-  function __construct( $value, $mode = self::CHAIN )
+  function __construct( $value )
   {
-    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to create new X class with a wrong mode" );
-
     $this->value = $value;
-    $this->_MODE = $mode;
   }
 
   public function __call( $func, $args )
@@ -61,14 +55,10 @@ class X
 
     }
 
-    if ( $method == true ) $value = [$this, $func]( ...$args );               // is it's method we don't pass value
-    else                   $value = $func         ( $this->value, ...$args );
+    if ( $method == true ) return [$this, $func] ( ...$args );              // is it's method we don't pass value
+    else                   $this->value = $func  ( $this->value, ...$args );
 
-        if ( $this->_MODE == self::RETURN ) return $value;
-    elseif ( $this->_MODE == self::CHAIN  ) {
-      $this->value = $value;
-      return $this;
-    }
+    return $this;
   }
 
   /**
@@ -93,163 +83,163 @@ class X
   public function set( $value )
   {
     $this->value = $value;
-    if ( $this->_MODE == self::CHAIN ) return $this       ;
-    else                               return $this->value;
-  }
-
-  /**
-    *   Gets curent value
-    *
-    *   @param int to which mode switch
-    *
-    *   @return Type|void depends on which mode is enabled
-    */
-
-  public function mode( int $mode )
-  {
-    if ( $mode != self::CHAIN && $mode != self::RETURN ) throw new \Error( "Tried to change mode with wrong value" );
-
-    $this->_MODE = $mode;
-
-    if ($this->_MODE == self::CHAIN) return $this;
+    return $this;
   }
 
   // all exception for native function which don't take value as first parameter
   // making them into methods is quicker than preparing arguments in switch
 
-  public function explode( string $sep, int $limit = PHP_INT_MAX ) : array
+  public function explode( string $sep, int $limit = PHP_INT_MAX )
   {
-    return explode( $sep, $this->value, $limit );
+    $this->value = explode( $sep, $this->value, $limit );
+    return $this;
   }
 
-  public function str_replace( $search, $replace, int $count = null ) : string
+  public function str_replace( $search, $replace, int $count = null )
   {
-    return str_replace( $search, $replace, $this->value, $count );
+    $this->value = str_replace( $search, $replace, $this->value, $count );
+    return $this;
   }
 
-  public function get_html_translation_table( int $table = HTML_SPECIALCHARS , int $flags = ENT_COMPAT , string $encoding = "UTF-8" ) : array
+  public function get_html_translation_table( int $table = HTML_SPECIALCHARS , int $flags = ENT_COMPAT , string $encoding = "UTF-8" )
   {
-    return get_html_translation_table( $table, $flags, $encoding );
+    $this->value = get_html_translation_table( $table, $flags, $encoding );
+    return $this;
   }
 
   public function localeconv()
   {
-    return localeconv();
+    $this->value = localeconv();
+    return $this;
   }
 
   public function nl_langinfo( int $item )
   {
-    return nl_langinfo( $item );
+    $this->value = nl_langinfo( $item );
+    return $this;
   }
 
   public function setlocale()
   {
     $args = func_get_args();
-    return nl_langinfo( ...$args );
+    $this->value = nl_langinfo( ...$args );
+    return $this;
   }
 
   // Array exceptions
 
-  public function array_combine( array $keys ) : array
+  public function array_combine( array $keys )
   {
-    return array_combine( $keys, $this->value );
+    $this->value = array_combine( $keys, $this->value );
+    return $this;
   }
 
-  public function ary_combine( array $keys ) : array
+  public function ary_combine( array $keys )
   {
-    return array_combine( $keys, $this->value );
+    $this->value = array_combine( $keys, $this->value );
+    return $this;
   }
 
-  public function array_fill( int $start_index , int $count , mixed $value ) : array
+  public function array_fill( int $start_index , int $count , mixed $value )
   {
-    return array_fill( $start_index, $count, $value );
+    $this->value = array_fill( $start_index, $count, $value );
+    return $this;
   }
 
-  public function array_key_exists( $key ) : int
+  public function array_key_exists( $key )
   {
-    return array_key_exists( $key, $this->value );
+    $this->value = array_key_exists( $key, $this->value );
+    return $this;
   }
 
-  public function ary_key_exists( $key ) : int
+  public function ary_key_exists( $key )
   {
-    return array_key_exists( $key, $this->value );
+    $this->value = array_key_exists( $key, $this->value );
+    return $this;
   }
 
-  public function key_exists( $key ) : int
+  public function key_exists( $key )
   {
-    return array_key_exists( $key, $this->value );
+    $this->value = array_key_exists( $key, $this->value );
+    return $this;
   }
 
   public function array_search( $needle , bool $strict = false )
   {
-    return array_search( $needle , $this->value, $strict );
+    $this->value = array_search( $needle , $this->value, $strict );
+    return $this;
   }
 
   public function ary_search( $needle , bool $strict = false )
   {
-    return array_search( $needle , $this->value, $strict );
+    $this->value = array_search( $needle , $this->value, $strict );
+    return $this;
   }
 
-  public function in_array( $needle, bool $strict = false ) : bool
+  public function in_array( $needle, bool $strict = false )
   {
-    return in_array( $needle, $this->value, $strict );
+    $this->value = in_array( $needle, $this->value, $strict );
+    return $this;
   }
 
-  public function range( $start, $end, $step = 1 ) : array
+  public function range( $start, $end, $step = 1 )
   {
-    return range( $start, $end, $step = 1 );
+    $this->value = range( $start, $end, $step = 1 );
+    return $this;
   }
 
-  public function uasort( $callback ) : array
+  public function uasort( $callback )
   {
     uasort( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function array_walk_recursive( $callback ) : array
+  public function array_walk_recursive( $callback )
   {
     array_walk_recursive( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function ary_walk_recursive( $callback ) : array
+  public function ary_walk_recursive( $callback )
   {
     array_walk_recursive( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function array_walk( $callback ) : array
+  public function array_walk( $callback )
   {
     array_walk( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function ary_walk( $callback ) : array
+  public function ary_walk( $callback )
   {
     array_walk( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function array_map( $callback ) : array
+  public function array_map( $callback )
   {
-    return array_map( $callback, $this->value );
+    $this->value = array_map( $callback, $this->value );
+    return $this;
   }
 
-  public function ary_map( $callback ) : array
+  public function ary_map( $callback )
   {
-    return array_map( $callback, $this->value );
+    $this->value = array_map( $callback, $this->value );
+    return $this;
   }
 
-  public function uksort( $callback ) : array
+  public function uksort( $callback )
   {
     uksort( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
-  public function usort( $callback ) : array
+  public function usort( $callback )
   {
     usort( $this->value, $callback );
-    return $this->value;
+    return $this;
   }
 
 }
