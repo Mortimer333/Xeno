@@ -1,0 +1,33 @@
+[
+  {
+  	"function": "class_alias",
+  	"values": ["Xeno\\X","X"]
+  },{
+  	"function": "class_exists",
+  	"values": ["Xeno"]
+  },{
+  	"function": "get_called_class",
+  	"values": []
+  },{
+  	"function": "get_class_methods",
+  	"values": ["Xeno"]
+  },{
+  	"function": "get_class_vars",
+  	"values": ["Xeno"]
+  },{
+  	"function": "get_declared_classes",
+  	"values": []
+  },{
+  	"function": "get_declared_interfaces",
+  	"values": []
+  },{
+  	"function": "get_declared_traits",
+  	"values": []
+  },{
+  	"function": "interface_exists",
+  	"values": ["A"]
+  },{
+  	"function": "trait_exists",
+  	"values": ["Xeno"]
+  }
+]
