@@ -70,7 +70,7 @@
           <?php
             $type = new Xeno\X(["a"=>"a","b"=>"b"]);
             $var = call_user_func_array( array($type, $fun['function']), $fun['values'] );
-            var_dump($var->get();
+            var_dump($var->get());
           ?>
         </div>
         <?php
@@ -111,7 +111,6 @@
       <br>
       <?php
         print_r( $uasort->get() );
-        $uasort->mode( Xeno\X::RETURN );
         $uasort->uasort('cmp');
       ?>
       <br>

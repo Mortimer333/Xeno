@@ -63,7 +63,7 @@
             if (sizeof($fun->values) == 0) $fun->values[0] = "";
             $type = new Xeno\X($fun->values[0]);
             $var = call_user_func_array( array($type, $fun->function), array_slice($fun->values,1) );
-            var_dump($var->get();
+            var_dump($var->get());
           ?>
         </div>
         <?php
