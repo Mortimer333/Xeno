@@ -273,4 +273,66 @@ class X
     return $this;
   }
 
+  // PCRE exceptions
+
+  public function preg_replace( $pattern, $replacement, int $limit = -1 , int &$count = null )
+  {
+    $this->value = preg_replace( $pattern, $replacement, $this->value, $limit, $count );
+    return $this;
+  }
+
+  public function preg_filter( $pattern, $replacement, int $limit = -1 , int &$count = null )
+  {
+    $this->value = preg_filter( $pattern, $replacement, $this->value, $limit, $count );
+    return $this;
+  }
+
+  public function preg_grep( string $pattern, int $flags = 0 )
+  {
+    $this->value = preg_grep( $pattern, $this->value, $flags );
+    return $this;
+  }
+
+  // PHP 8
+  public function preg_last_error_msg()
+  {
+    preg_last_error_msg();
+    return $this;
+  }
+
+  public function preg_last_error() : int
+  {
+    preg_last_error();
+    return $this;
+  }
+
+  public function preg_match_all( string $pattern, array &$matches = null , int $flags = 0 , int $offset = 0 )
+  {
+    $this->value = preg_match_all( $pattern, $this->value, $matches, $flags, $offset );
+    return $this;
+  }
+
+  public function preg_match( string $pattern, array &$matches = null , int $flags = 0 , int $offset = 0 )
+  {
+    $this->value = preg_match( $pattern, $this->value, $matches, $flags, $offset );
+    return $this;
+  }
+
+  public function preg_replace_callback_array( array $pattern, int $limit = -1, int &$count = null, int $flags = 0 )
+  {
+    $this->value = preg_replace_callback_array( $pattern, $this->value, $limit, $count, $flags );
+    return $this;
+  }
+
+  public function preg_replace_callback( $pattern, $callback, int $limit = -1, int &$count = null, int $flags = 0 )
+  {
+    $this->value = preg_replace_callback( $pattern, $callback, $this->value , $limit, $count, $flags );
+    return $this;
+  }
+
+  public function preg_split( string $pattern, int $limit = -1, int $flags = 0 )
+  {
+    $this->value = preg_replace_callback( $pattern, $this->value, $limit, $flags );
+    return $this;
+  }
 }
