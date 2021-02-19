@@ -60,16 +60,16 @@ class X
 
     }
 
-    if ( $method == true ) return [$this, $func] ( ...$args );              // is it's method we don't pass value
+    if ( $method == true ) return [$this, $func] ( ...$args );              // if it's method we don't pass value
     else                   $this->value = $func  ( $this->value, ...$args );
 
     return $this;
   }
 
   /**
-    * Gets curent value
+    *   Gets curent value
     *
-    * @return mixin depends on previously used functions
+    *   @return mixin depends on previously used functions
     */
 
   public function get ()
@@ -80,9 +80,9 @@ class X
   /**
     *   Sets curent value
     *
-    *   @param mixin depened to which value you want to switch
+    *   @param mixin depened to which value you want to set
     *
-    *   @return Type | mixin
+    *   @return X | mixin
     */
 
   public function set( $value )
@@ -91,8 +91,8 @@ class X
     return $this;
   }
 
-  // all exception for native function which don't take value as first parameter
-  // making them into methods is quicker than preparing arguments in switch
+  // all exception for native function which don't take value as its first parameter
+  // making them into methods is quicker than preparing arguments in switch or map
 
   public function explode( string $sep, int $limit = PHP_INT_MAX )
   {
