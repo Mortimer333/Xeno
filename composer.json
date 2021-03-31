@@ -1,10 +1,6 @@
 {
     "name": "xeno/xeno",
     "description" : "Dynamically changes native PHP functions into chain syntax",
-    "dist": {
-        "url": "https://github.com/Mortimer333/Xeno/archive/0.5.0.zip",
-        "type": "zip"
-    },
     "keywords": ["chain","syntax"],
     "license": "GPL-2.0-only",
     "autoload": {
